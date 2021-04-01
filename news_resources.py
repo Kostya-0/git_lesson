@@ -1,6 +1,5 @@
 from flask_restful import reqparse, abort, Api, Resource
 from flask import jsonify
-from flask_restful import abort
 from data import db_session
 from data.news import News
 from reqparse import parser
@@ -26,6 +25,7 @@ class NewsResource(Resource):
         session.delete(news)
         session.commit()
         return jsonify({'success': 'OK'})
+
 
 class NewsListResource(Resource):
     def get(self):

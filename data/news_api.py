@@ -1,5 +1,6 @@
 import flask
 from flask import jsonify, request
+
 from . import db_session
 from .news import News
 
@@ -35,7 +36,6 @@ def get_one_news(news_id):
                 'title', 'content', 'user_id', 'is_private'))
         }
     )
-
 
 @blueprint.route('/api/news', methods=['POST'])
 def create_news():
