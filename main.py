@@ -1,10 +1,9 @@
 from flask import Flask
 from flask import url_for, request, render_template, redirect
 from flask import make_response, session, abort, jsonify
-import os
 
 import json
-import news_resources
+import os
 
 from data import db_session, news_api
 from data.users import User
@@ -18,8 +17,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 from wtforms.fields.html5 import EmailField
+import news_resources
 
-from flask_restful import reqparse, abort, Api, Resource
+from flask_restful import reqparse, Api, Resource
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -44,7 +44,6 @@ def load_user(user_id):
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
-
 
 @app.route("/")
 def index():
@@ -176,6 +175,7 @@ def session_test():
 def main():
     db_session.global_init("db/blogs.db")
     app.register_blueprint(news_api.blueprint)
+
     # для списка объектов
     api.add_resource(news_resources.NewsListResource, '/api/v2/news')
     # для одного объекта
@@ -184,7 +184,6 @@ def main():
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
     #app.run(host='127.0.0.1', port=port)
-    #app.run()
 
 
 if __name__ == '__main__':
